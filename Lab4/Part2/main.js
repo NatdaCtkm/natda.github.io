@@ -1,0 +1,63 @@
+/*
+Name: Natda Chanthakoumman
+File: main.js
+Date: 31 July 2026
+Lab 4 Part 2 for INFT1206 - Web Development Fundamentals
+*/
+
+const displayedImage = document.querySelector(".displayed-img");
+const thumbBar = document.querySelector(".thumb-bar");
+
+const btn = document.querySelector("button");
+const overlay = document.querySelector(".overlay");
+
+// Looping through images 
+const images = [
+  { filename: "pic1.jpg", alt: "Closeup of a human eye" },
+  { filename: "pic2.jpg", alt: "Rock that looks like a wave" },
+  { filename: "pic3.jpg", alt: "Purple and white pansies" },
+  { filename: "pic4.jpg", alt: "Section of wall from a pharaoh's tomb" },
+  { filename: "pic5.jpg", alt: "Large moth on a leaf" },
+];
+
+// Create a baseURL constant containing the baseURL of the images
+const baseURL = "images/";
+
+for (const image of images) {
+
+  const newImage = document.createElement("img");
+
+  newImage.src = `${baseURL}${image.filename}`;
+  newImage.alt = image.alt;
+
+  newImage.tabIndex = "0";
+
+  thumbBar.appendChild(newImage);
+ 
+  newImage.addEventListener("click", updateDisplayedImage);
+
+  newImage.addEventListener("keydown", (e) => {
+    if (e.code === "Enter") {
+      updateDisplayedImage(e);
+    }
+  });
+}
+
+function updateDisplayedImage(e) {
+  displayedImage.src = e.target.src;
+  displayedImage.alt = e.target.alt;
+}
+
+// Wiring up the Darken/Lighten button
+btn.addEventListener("click", () => {
+  const btnClass = btn.getAttribute("class");
+  if (btnClass === "dark") {
+    btn.setAttribute("class", "light");
+    btn.textContent = "Lighten";
+    overlay.style.backgroundColor = "rgb(0 0 0 / 0.5)";
+  } else {
+    btn.setAttribute("class", "dark");
+    btn.textContent = "Darken";
+    overlay.style.backgroundColor = "rgb(0 0 0 / 0)";
+  }
+});
