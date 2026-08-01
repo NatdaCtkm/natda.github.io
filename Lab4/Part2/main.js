@@ -20,7 +20,6 @@ const images = [
   { filename: "pic5.jpg", alt: "Large moth on a leaf" },
 ];
 
-// Create a baseURL constant containing the baseURL of the images
 const baseURL = "images/";
 
 for (const image of images) {
@@ -48,7 +47,6 @@ function updateDisplayedImage(e) {
   displayedImage.alt = e.target.alt;
 }
 
-// Wiring up the Darken/Lighten button
 btn.addEventListener("click", () => {
   const btnClass = btn.getAttribute("class");
   if (btnClass === "dark") {
